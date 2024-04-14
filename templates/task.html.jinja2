@@ -4,47 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/project_details.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/task.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
- <div class="container-fluid">
-  <a class="navbar-brand" href="#">Menu</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/myprojects">Projects</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
-      </li>
-    </ul>
-  </div>
- </div>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/myprojects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 <br>
 <h1 id="titre_modif">{{ task.task_name }}</h1>
 <br>
-<div class="container">
-    <div class="centered-element">
-    <p>Date Limite : {{ task.deadline }}</p>
-    <div id="manager_use" manager="{{ task.project.manager }}" username="{{ user.username }}"> <button id="edit-task-btn" data-edit-url="{{ url_for('edit_task_form', task_id=task.id) }}">Modifier la tâche</button>
-    <div id="edit-task-form-container"></div>
-    <br><br>
-    <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post"
-          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?');">
-        <button type="submit">Supprimer la tâche</button>
-    </form>
+
+<div class="flex-container">
+    <div class="info">
+        <p>Date Limite : {{ task.deadline }}</p>
+        <!-- Bouton de modification/suppression de la tâche -->
+        <div id="manager_use" manager="{{ task.project.manager }}" username="{{ user.username }}">
+            <button id="edit-task-btn" data-edit-url="{{ url_for('edit_task_form', task_id=task.id) }}">Modifier la tâche</button>
+            <div id="edit-task-form-container"></div>
+            <br><br>
+            <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?');">
+                <button type="submit">Supprimer la tâche</button>
+            </form>
+        </div>
     </div>
-    <script src="{{ url_for('static', filename='js/task.js') }}"></script>
+    <div class="comments">
+        <!-- Section des commentaires -->
+        <div id="comments-section">
+            <form id="comment-form" action="{{ url_for('add_comment', project_id=project.id, task_id=task.id) }}" method="post">
+                <textarea id="new-comment" name="content" placeholder="Ajouter un commentaire"></textarea>
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/task.js') }}"></script>
 </body>
 </html>
-
-

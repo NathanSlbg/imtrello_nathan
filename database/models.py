@@ -12,10 +12,24 @@ class Task(db.Model):
     project = db.relationship('Project', backref=db.backref('tasks', lazy=True))
 
 
+
+
 user_to_project = db.Table('user_to_project',
                            db.Column("project_id", db.Integer, db.ForeignKey('project.id')),
                            db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
                            )
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    project_id=db.Column(db.Integer, db.ForeignKey('project.id'))
+    task_id = db.Column(db.Integer, db.ForeignKey('task.id'))
+    date = db.Column(db.DateTime)
+
+    user = db.relationship('User', backref=db.backref('comments', lazy=True))
+    task = db.relationship('Task', backref=db.backref('comments', lazy=True))
 
 
 class Project(db.Model):

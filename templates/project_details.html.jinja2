@@ -45,7 +45,8 @@
     </ul>
     <p>Description : {{ project.description }}</p>
     <p>Limit Date : {{ project.deadline }}</p>
-    <div id="manager_use" manager="{{ project.manager }}" username="{{ user.username }}"> <button class="general-button" data-edit-url="{{ url_for('edit_project_form', project_id=project.id) }}">Modifier le projet</button>
+    <div id="manager_use" manager="{{ project.manager }}" username="{{ user.username }}">
+        <button class="general-button" id="edit-project-btn" data-edit-url="{{ url_for('edit_project_form', project_id=project.id) }}">Modifier le projet</button>
     <div id="edit-project-form-container"></div>
     <br><br>
     <form action="{{ url_for('delete_project', project_id=project.id) }}" method="post"

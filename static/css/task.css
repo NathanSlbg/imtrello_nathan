@@ -1,0 +1,139 @@
+@import "general.css";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #edf5fc;
+    margin: 0;
+    padding: 0;
+}
+
+.info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.contour_project {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #272D2D; /* Fond gris */
+    border-radius: 8px;
+    /*margin-bottom: 20px;*/
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 3px;
+}
+
+
+.task-carte {
+    padding: 25px;
+    margin: 25px;
+    width: fit-content;
+}
+
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #272D2D;
+}
+
+p{
+   color: #edf5fc;
+}
+button {
+  background-color: #272D2D;
+  border: none;
+  color: #edf5fc;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+    border-radius: 8px;
+}
+
+.project {
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.project h2 {
+    color: #edf5fc;
+    margin-top: 0;
+
+}
+
+.description {
+    color: #666;
+
+}
+
+.deadline {
+    color: #999;
+    font-size: 0.9em;
+    margin-top: 10px;
+
+}
+
+.centered-element{
+justify-content: center;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+
+
+    background-color: #272D2D;
+
+}
+
+#logout_b {
+  background-color: #272D2D;
+  border: none;
+  color: #edf5fc;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+#user_text{
+    color: #edf5fc;
+}
+x
+
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: lightgreen;
+    border: none;
+    color: #edf5fc;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+label {
+    color: #edf5fc;
+}
+
+.contour_task {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #272D2D; /* Fond gris */
+    border-radius: 8px;
+    /*margin-bottom: 20px;*/
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 3px;
+}

@@ -4,6 +4,7 @@ from datetime import datetime
 import flask
 from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 
+from comment import add_comment_to_database
 from manage_users import *
 from database.database import db, init_database
 from projects import add_project, update_project, get_all_projects, get_project_by_id, update_project_in_database, \
@@ -363,6 +364,20 @@ def edit_task_form(project_id, task_id):
 def profile():
     user = User.query.filter_by(username=session.get('username')).first()
     return render_template("profile_page.html.jinja2", user=user)
+
+
+@app.route('/projet/<int:project_id>/<int:task_id>', methods=['POST'])
+@is_connected
+def add_comment(project_id, task_id):
+    content = request.form['content']
+    time = datetime.now()
+
+    user = User.query.filter_by(username=session.get('username')).first()
+    user_id = user.id
+
+    add_comment_to_database(content,time,project_id,task_id, user_id)
+
+    return redirect(url_for('display_task', project_id=project_id, task_id=task_id))
 
 
 if __name__ == '__main__':
