@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/project_details.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <!-- Importe la fonte LATO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
@@ -18,6 +17,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
  <div class="container-fluid">
+  <a class="navbar-brand" href="#">Menu</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
 
   <div class="collapse navbar-collapse" id="navbarColor01">
@@ -25,6 +28,10 @@
 
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/myprojects">Projects</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('display_notifications') }}">
+        Notifications {% if unread_notification_count > 0 %}<span class="badge bg-danger">{{ unread_notification_count }}</span>{% endif %}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/profile">Profile</a>
@@ -40,13 +47,13 @@
 <div class="flex-container">
     <form action="{{ url_for("display_project_details", project_id=project.id) }}" method="get">
     <button class="general-button">
-        Détails projet
+        Project details
     </button>
 </form>
 <br>
 <form action="{{ url_for("display_add_task", project_id=project.id) }}" method="get">
     <button class="general-button add">
-        Nouvelle tâche
+        New task
     </button>
 </form>
 </div>

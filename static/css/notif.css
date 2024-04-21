@@ -1,10 +1,65 @@
 @import "general.css";
 
+.notification {
+    background-color: mediumpurple;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.read {
+    background-color: grey;
+}
+.unread {
+    background-color: mediumpurple;
+    color: #000;
+}
+.comment {
+    max-width: 70%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+.comments-section{
+    display : flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+
+}
+
+.right-comment {
+    background-color: purple;
+    color: white;
+    align-self: flex-end;
+}
+
+.left-comment {
+    background-color: #333;
+    color: white;
+    align-self: flex-start;
+}
+
+.comment_date {
+    font-size: 0.2em;
+    color: white;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #edf5fc;
     margin: 0;
     padding: 0;
+}
+
+.info {
+    flex: 1;
+    padding-right: 20px;
 }
 
 .contour_project {
@@ -35,7 +90,7 @@ body {
 }
 
 h1 {
-    color: #272D2D;
+    color: white;
 }
 
 p{
@@ -51,10 +106,6 @@ button {
   display: inline-block;
   font-size: 16px;
     border-radius: 8px;
-}
-
-.add{
-    margin-left: 20px
 }
 
 .project {
@@ -110,6 +161,7 @@ justify-content: center;
 }
 
 
+
 input[type=button], input[type=submit], input[type=reset] {
     background-color: lightgreen;
     border: none;
@@ -129,8 +181,9 @@ label {
     display: flex;
     justify-content: center;
     padding: 20px;
-    background-color: #272D2D;
+    background-color: #272D2D; /* Fond gris */
     border-radius: 8px;
+    /*margin-bottom: 20px;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 3px;
 }

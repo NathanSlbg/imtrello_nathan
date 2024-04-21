@@ -3,10 +3,8 @@
 
   <head>
     <meta charset="utf-8">
-    <!-- Mise à l'echelle pour les navigateurs mobiles -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Importe la fonte LATO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
@@ -32,6 +30,10 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/myprojects">Projects</a>
       </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('display_notifications') }}">
+        Notifications {% if unread_notification_count > 0 %}<span class="badge bg-danger">{{ unread_notification_count }}</span>{% endif %}</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="/profile">Profile</a>
       </li>
@@ -42,13 +44,13 @@
 
 
 <br>
-<h1 id="title1"> Mes Boards</h1>
+<h1 id="title1"> My Boards</h1>
 <br>
 
 <form action="{{ url_for("display_add_project") }}" method="get">
     <div class="centre">
         <button class="login-button">
-        Nouveau projet
+        New Project
         </button>
     </div>
 

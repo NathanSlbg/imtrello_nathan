@@ -1,8 +1,7 @@
-from database.models import Task, Project, User, user_to_project
+from database.models import Task, Project, User, user_to_project, Comment
 from database.database import db
 
 
-# Functions to manage tasks within projects
 def add_task_to_project(project_id, task_name, deadline, is_done=False):
     project = Project.query.get(project_id)
     if project:
@@ -24,13 +23,16 @@ def get_task_by_id(task_id):
     return task
 
 
-def update_task_in_project(task_id, label=None, is_done=None):
+def update_task_in_project(task_id, deadline=None, task_name=None, is_done=None):
     task = Task.query.get(task_id)
     if task:
-        if label is not None:
-            task.label = label
+        if task_name is not None:
+            task.name = task_name
         if is_done is not None:
             task.isDone = is_done
+        if deadline is not None:
+            task.deadline = deadline
+
         db.session.commit()
     return task
 
@@ -97,34 +99,18 @@ def delete_project_in_database(project_id):
     """Delete a project by its ID."""
     project = Project.query.get(project_id)
     if project:
+        delete_comments_by_project(project_id)
         db.session.delete(project)
         db.session.commit()
     return project
 
-
-def delete_all_projects():
-    """Delete all projects from the database."""
-    deleted_projects = Project.query.delete()
+def delete_comments_by_project(project_id):
+    tasks = Task.query.filter_by(project_id=project_id).all()
+    for task in tasks:
+        comments = Comment.query.filter_by(task_id=task.id).all()
+        for comment in comments:
+            db.session.delete(comment)
     db.session.commit()
-    return deleted_projects
 
 
-def get_projects_by_status(is_done):
-    """Retrieve projects based on their status (done or not done)."""
-    return Project.query.filter_by(isDone=is_done).all()
-
-
-def get_total_projects():
-    """Retrieve the total number of projects in the database."""
-    return Project.query.count()
-
-
-def get_all_projects_sorted_by_label():
-    """Retrieve all projects sorted alphabetically by their label."""
-    return Project.query.order_by(Project.label).all()
-
-
-def search_projects_by_keyword(keyword):
-    """Search for projects containing a specific keyword in their label."""
-    return Project.query.filter(Project.label.ilike(f'%{keyword}%')).all()
 

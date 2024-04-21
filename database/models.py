@@ -49,3 +49,12 @@ class User(db.Model):
     email = db.Column(db.Text)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
+
+class Notif(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.Text)
+    content = db.Column(db.Text)
+    date = db.Column(db.DateTime)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    read = db.Column(db.Boolean,default=False)
+

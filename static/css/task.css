@@ -1,5 +1,42 @@
 @import "general.css";
 
+.comment {
+    max-width: 70%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+.comments-section{
+    display : flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+
+}
+
+.right-comment {
+    background-color: purple;
+    color: white;
+    align-self: flex-end;
+}
+
+.left-comment {
+    background-color: #333;
+    color: white;
+    align-self: flex-start;
+}
+
+.comment-date {
+    align-self: flex-end;
+    font-size: 0.8em;
+    color: white;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #edf5fc;
@@ -16,9 +53,8 @@ body {
     display: flex;
     justify-content: center;
     padding: 20px;
-    background-color: #272D2D; /* Fond gris */
+    background-color: #272D2D;
     border-radius: 8px;
-    /*margin-bottom: 20px;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 3px;
 }
@@ -40,7 +76,7 @@ body {
 }
 
 h1 {
-    color: #272D2D;
+    color: #ffffff;
 }
 
 p{
@@ -121,6 +157,7 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
+    margin-top: 0;
 }
 
 label {
@@ -131,9 +168,8 @@ label {
     display: flex;
     justify-content: center;
     padding: 20px;
-    background-color: #272D2D; /* Fond gris */
+    background-color: #272D2D;
     border-radius: 8px;
-    /*margin-bottom: 20px;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 3px;
 }

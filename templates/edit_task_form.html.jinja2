@@ -1,11 +1,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/project_details.css') }}">
 <form id="editTaskForm" action="{{ url_for('edit_task_form',project_id=project.id, task_id=task.id) }}" method="post">
-    <label for="edit_project_name">Nom de la Tâche:</label><br>
+    <label for="edit_task_name">Nom de la Tâche:</label><br>
     <input type="text" id="edit_task_name" name="task_name" value="{{ task.task_name }}"><br>
     <label for="edit_deadline_date">Date Limite:</label><br>
     <input type="date" id="edit_deadline_date" name="deadline_date" value="{{ task.deadline.strftime('%Y-%m-%d') }}"><br>
     <label for="edit_deadline_time">Heure Limite:</label><br>
     <input type="time" id="edit_deadline_time" name="deadline_time" value="{{ task.deadline.strftime('%H:%M') }}"><br>
     <button type="submit">Enregistrer</button>
-    <button type="button" id="cancelEdit">Annuler</button>
 </form>

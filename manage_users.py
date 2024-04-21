@@ -24,3 +24,6 @@ def register_check_data(email, username):
 def create_project():
     new_project = Project()
     return
+
+def get_user_by_username(username):
+    return User.query.filter_by(username=username).first()

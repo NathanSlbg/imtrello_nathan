@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Details</title>
+    <title>{{ task.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/task.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -22,9 +22,13 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/myprojects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('display_notifications') }}">
+                        Notifications {% if unread_notification_count > 0 %}
+                        <span class="badge bg-danger">{{ unread_notification_count }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
@@ -39,21 +43,35 @@
 
 <div class="flex-container">
     <div class="info">
-        <p>Date Limite : {{ task.deadline }}</p>
-        <!-- Bouton de modification/suppression de la tâche -->
+        <p>Deadline : {{ task.deadline }}</p>
         <div id="manager_use" manager="{{ task.project.manager }}" username="{{ user.username }}">
-            <button id="edit-task-btn" data-edit-url="{{ url_for('edit_task_form', task_id=task.id) }}">Modifier la tâche</button>
+            <button class="general-button" id="edit-task-btn"
+                    data-edit-url="{{ url_for('edit_task_form',project_id=project.id, task_id=task.id) }}">Edit the task
+            </button>
             <div id="edit-task-form-container"></div>
             <br><br>
-            <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?');">
-                <button type="submit">Supprimer la tâche</button>
+            <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post"
+                  onsubmit="return confirm('Are you sure you want to delete the task?');">
+                <button type="submit">Delete the task</button>
             </form>
         </div>
     </div>
     <div class="comments">
-        <!-- Section des commentaires -->
-        <div id="comments-section">
-            <form id="comment-form" action="{{ url_for('add_comment', project_id=project.id, task_id=task.id) }}" method="post">
+        <h1> Comments section</h1>
+
+        <div class="comments-section">
+            {% for comment in comments %}
+                <div class="comment {% if comment.user_id == user.id %} right-comment {% else %} left-comment {% endif %}">
+                    {% if comment.user_id != user.id %}
+                        <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+                    {% else %}
+                        <p>{{ comment.content }}</p>
+                    {% endif %}
+                </div>
+                <div class="comment-date">{{ comment.date.strftime('%H:%M') }}</div>
+            {% endfor %}
+            <form id="comment-form" action="{{ url_for('add_comment', project_id=project.id, task_id=task.id) }}"
+                  method="post">
                 <textarea id="new-comment" name="content" placeholder="Ajouter un commentaire"></textarea>
                 <button type="submit">Ajouter</button>
             </form>
