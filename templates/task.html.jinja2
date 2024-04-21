@@ -72,8 +72,8 @@
             {% endfor %}
             <form id="comment-form" action="{{ url_for('add_comment', project_id=project.id, task_id=task.id) }}"
                   method="post">
-                <textarea id="new-comment" name="content" placeholder="Ajouter un commentaire"></textarea>
-                <button type="submit">Ajouter</button>
+                <textarea id="new-comment" name="content" placeholder="Add a comment"></textarea>
+                <button type="submit">Add</button>
             </form>
         </div>
     </div>
